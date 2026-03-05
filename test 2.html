@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Minecraft Packs</title>
+
+<style>
+body{
+ margin:0;
+ font-family:'Segoe UI',Arial,sans-serif;
+ color:white;
+ background:
+   linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.8)),
+   url("1768728196983.jpg");
+ background-size:cover;
+ background-attachment:fixed;
+}
+
+/* HEADER + ẢNH KÊNH */
+header{
+ text-align:center;
+ padding:20px 15px;
+}
+
+header img{
+ width:90px;
+ height:90px;
+ border-radius:50%;
+ object-fit:cover;
+ box-shadow:0 0 15px rgba(34,211,238,.8);
+ margin-bottom:10px;
+}
+
+header h2{
+ margin:5px 0 10px;
+ font-size:22px;
+}
+
+.grid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:12px;
+ padding:15px
+}
+
+.card{
+ background:rgba(17,24,39,0.7);
+ backdrop-filter:blur(6px);
+ padding:10px;
+ border-radius:12px;
+ text-align:center;
+ box-shadow:0 0 10px black;
+}
+
+.card img{
+ width:100%;
+ height:140px;
+ object-fit:cover;
+ border-radius:8px
+}
+
+a.btn,button{
+ display:block;
+ margin-top:6px;
+ background:#22d3ee;
+ color:black;
+ padding:8px;
+ border-radius:6px;
+ text-decoration:none;
+ font-weight:bold;
+ border:none;
+ width:100%;
+ cursor:pointer;
+
+ box-shadow:0 5px 0 #0ea5b7;
+ transition:0.1s;
+}
+
+.download{
+ background:#4ade80;
+ box-shadow:0 5px 0 #16a34a;
+}
+
+.back{
+ background:#f87171;
+ box-shadow:0 5px 0 #dc2626;
+}
+
+a.btn:active,button:active{
+ transform:translateY(4px);
+ box-shadow:0 1px 0 transparent;
+}
+
+#detail{
+ display:none;
+ padding:20px;
+ text-align:center;
+ background:rgba(0,0,0,.6);
+ backdrop-filter:blur(8px);
+}
+
+#detail img{
+ width:90%;
+ max-width:400px;
+ border-radius:12px
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<img src="1769512407421.png"> <!-- ảnh kênh -->
+<h2>Minecraft Resource Packs</h2>
+<a class="btn" href="https://www.tiktok.com/@tin.nongvn?_r=1&_t=ZS-93B9geauRXU" target="_blank">
+My TikTok Channel
+</a>
+</header>
+
+<div id="list" class="grid"></div>
+
+<div id="detail">
+<h2 id="title"></h2>
+<img id="img">
+<p id="desc"></p>
+
+<a id="video" class="btn" target="_blank">▶ Watch original video</a>
+<a id="down" class="btn download" target="_blank">Download</a>
+
+<button class="btn back" onclick="back()">BACK</button>
+</div>
+
+<audio id="clickSound" src="click.mp3" preload="auto"></audio>
+
+<script>
+const packs=[
+ {
+  name:"The villagers speak Vietnamese",
+  img:"1768754456794.png",
+  link:"https://www.mediafire.com/file/92s2e98kivnq2og/Village...",
+  video:"https://vt.tiktok.com/ZSaypDygD/",
+  desc:"If you hit the villagers, they'll say :))"
+ },
+ {
+  name:"Bedwars 32x",
+  img:"https://yourimage2.jpg",
+  link:"https://link2.com",
+  video:"https://www.youtube.com/watch?v=xxxx",
+  desc:"Playing Bedwars is great."
+ }
+];
+
+const list=document.getElementById("list");
+const sound=document.getElementById("clickSound");
+
+packs.forEach((p,i)=>{
+ list.innerHTML+=`
+ <div class="card">
+  <img src="${p.img}">
+  <p>${p.name}</p>
+  <button onclick="show(${i})">See introduction</button>
+  <a class="btn download" href="${p.link}" target="_blank">Download</a>
+ </div>`;
+});
+
+function show(i){
+ list.style.display="none";
+ detail.style.display="block";
+
+ title.innerText=packs[i].name;
+ img.src=packs[i].img;
+ desc.innerText=packs[i].desc;
+ down.href=packs[i].link;
+ video.href=packs[i].video;
+}
+
+function back(){
+ detail.style.display="none";
+ list.style.display="grid";
+}
+
+document.addEventListener("click",e=>{
+ if(e.target.tagName==="BUTTON" || e.target.classList.contains("btn")){
+  sound.currentTime=0;
+  sound.play();
+ }
+});
+</script>
+
+</body>
+</html>
